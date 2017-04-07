@@ -10,7 +10,7 @@ with open( '/'.join([dirName, 'config.json']) ) as f:
     config = json.load(f)
 
 token = config["token"]
-deviceName = "1-wire-project"
+deviceName = config["deviceName"]
 oneWireGpio = 19
 
 def __main__():
@@ -34,7 +34,7 @@ def __main__():
     value = sensor.readValue()
     dataPoint = {
         "temperature": value
-    }    
+    }
     device.pushDataPoint(dataPoint)
     print dataPoint
 
