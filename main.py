@@ -3,6 +3,7 @@ import json
 import oneWire
 import temperatureSensor
 import ubidots
+import oledHelper
 # import config
 dirName = os.path.dirname(os.path.abspath(__file__))
 # read the config file relative to the script location
@@ -14,6 +15,9 @@ deviceName = config["deviceName"]
 oneWireGpio = 19
 
 def __main__():
+    # initialize oled
+    oledHelper.init(dirName)
+    
     device = ubidots.UbidotsDevice(token, deviceName)
 
     if not oneWire.setupOneWire(str(oneWireGpio)):
@@ -31,12 +35,14 @@ def __main__():
         return -1
 
     # check and print the temperature
-    value = sensor.readValue()
+    temperature = sensor.readValue()
     dataPoint = {
-        "temperature": value
+        "temperature": temperature
     }
     device.pushDataPoint(dataPoint)
-    print dataPoint
+    
+    # write to oled screen
+    oledHelper.writeMeasurements(temperature)
 
 if __name__ == '__main__':
     __main__()

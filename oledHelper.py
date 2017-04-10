@@ -18,7 +18,7 @@ def init(dirName):
 	# write the first word on the second line and the right side of the screen
 	oledExp.setTextColumns()
 	oledExp.setCursor(1,12)
-	oledExp.write('Temperature:')
+	oledExp.write('Temp:')
 
 # write out the soil moisture value
 def writeMeasurements(value):
@@ -37,4 +37,4 @@ def setDoneScreen():
 	oledExp.setTextColumns()
 	oledExp.setCursor(3,0)
 	# write out the text
-	oledExp.write( " SMART PLANT OFFLINE" )
+	oledExp.write( "TEMP SENSOR OFFLINE" )
